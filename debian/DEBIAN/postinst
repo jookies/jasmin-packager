@@ -1,0 +1,30 @@
+#!/bin/bash
+set -e
+
+# Add user & group
+addgroup --system jasmin
+adduser --disabled-login \
+		--disabled-password \
+		--system \
+		--home /usr/lib/jasmin \
+		--ingroup jasmin \
+		--no-create-home \
+		--gecos "Jasmin" \
+		jasmin
+
+# Create required folders
+mkdir /var/log/jasmin
+mkdir /var/run/jasmin
+
+# Change owner of required folders
+chown jasmin. /etc/jasmin/store/
+chown jasmin. /var/log/jasmin
+chown jasmin. /var/run/jasmin
+
+# Install init script
+if [ -x "/etc/init.d/jasmind" ]; then
+	update-rc.d jasmind defaults >/dev/null
+	invoke-rc.d jasmind start || exit $?
+fi
+
+exit 0

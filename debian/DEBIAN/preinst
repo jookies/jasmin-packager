@@ -1,0 +1,8 @@
+#!/bin/bash
+set -e
+
+# stop jasmin server
+if [ -f /etc/init.d/jasmind ]
+then
+  invoke-rc.d jasmind stop
+fi

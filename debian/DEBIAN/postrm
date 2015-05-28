@@ -1,0 +1,16 @@
+#!/bin/bash
+set -e
+
+if [ "$1" = "purge" ]; then
+    # Remove configuration
+    test -d /etc/jasmin && rm -fr /etc/jasmin
+    # Remove logs
+    test -d /var/log/jasmin && rm -fr /var/log/jasmin
+fi
+
+if [ "$1" = "remove" ]; then
+    # remove jasmind start script
+    update-rc.d -f jasmind remove >/dev/null
+fi
+
+exit 0

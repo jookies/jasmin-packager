@@ -1,0 +1,19 @@
+
+# Build package
+rm -f debian/usr/share/doc/jasmin-server/copyright
+rm -f debian/usr/share/doc/jasmin-server/changelog*
+cp files/changelog files/changelog.Debian files/copyright debian/usr/share/doc/jasmin-server
+gzip --best debian/usr/share/doc/jasmin-server/changelog
+gzip --best debian/usr/share/doc/jasmin-server/changelog.Debian
+find ./debian -name ".gitignore" | xargs rm -f 
+cd ./debian;find usr -type f -exec md5sum {} \; > md5sums;cd -;mv ./debian/md5sums debian/DEBIAN
+find ./debian -type d | xargs chmod 755
+find ./debian -type f | xargs chmod 644
+chmod 755 debian/DEBIAN/preinst
+chmod 755 debian/DEBIAN/postinst
+chmod 755 debian/DEBIAN/prerm
+chmod 755 debian/DEBIAN/postrm
+chmod 755 debian/etc/init.d/jasmind
+fakeroot dpkg-deb --build debian
+mv debian.deb jasmin-0.6.18-1_all.deb
+lintian jasmin-0.6.18-1_all.deb
