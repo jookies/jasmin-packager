@@ -40,15 +40,15 @@ gzip --best $WORK_DIR/package/usr/share/doc/python-jasmin/changelog.Debian
 sed -i "s/%debversion%/$2/" $WORK_DIR/package/DEBIAN/control
 
 ## /etc folder
-mkdir -p $WORK_DIR/package/etc/init.d $WORK_DIR/package/etc/jasmin/resource $WORK_DIR/etc/jasmin/store
+mkdir -p $WORK_DIR/package/etc/init.d $WORK_DIR/package/etc/jasmin/resource $WORK_DIR/package/etc/jasmin/store
 cp $WORK_DIR/jasmin-$1/misc/config/jasmin.cfg $WORK_DIR/package/etc/jasmin/
 cp $WORK_DIR/jasmin-$1/misc/config/resource/* $WORK_DIR/package/etc/jasmin/resource/
 cp $WORK_DIR/jasmin-$1/misc/config/init-script/jasmind-ubuntu $WORK_DIR/package/etc/init.d/jasmind
 
-## /usr/bin folder
+## /usr folder
 mkdir -p $WORK_DIR/package/usr/bin $WORK_DIR/package/usr/lib/python2.7/dist-packages
-cp -r $WORK_DIR/jasmin-$1/jasmin $WORK_DIR/package/usr/lib/python2.7/dist-packages/python-jasmin
-ln -s $WORK_DIR/package/usr/lib/python2.7/dist-packages/python-jasmin/bin/jasmind.py $WORK_DIR/package/usr/bin/jasmind
+cp -r $WORK_DIR/jasmin-$1/jasmin $WORK_DIR/package/usr/lib/python2.7/dist-packages/jasmin
+cp $WORK_DIR/package/usr/lib/python2.7/dist-packages/jasmin/bin/jasmind.py $WORK_DIR/package/usr/bin/jasmind
 
 # Remove unneeded files
 find $WORK_DIR/package -name ".gitignore" | xargs rm -f 
