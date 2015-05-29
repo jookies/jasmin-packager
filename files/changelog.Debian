@@ -1,8 +1,0 @@
-jasmin-server (0.6.18-1) unstable; urgency=low
-
-  * Implement submit_sm retry on failure depending on the error type (for 
-    example ESME_RTHROTTLED ...) (GH: #60)
-  * Don't charge messages when sending SMS through SMPP returns an error in 
-    submit_sm_resp (GH: #164)
-
- -- Fourat ZOUARI <fourat@gmail.com>  Wed, 27 May 2015 22:50:00 +0100

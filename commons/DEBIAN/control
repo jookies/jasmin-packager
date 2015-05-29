@@ -1,15 +1,16 @@
-Package: jasmin-server
-Version: 0.6.18-1
-Section: net
+Package: python-jasmin
+Version: %debversion%
+Section: python
 Priority: optional
 Architecture: all
-Depends: python2.7, python (>= 2.7.0), python (<< 2.8), gcc, python-dev, libffi-dev, libssl-dev, rabbitmq-server, redis-server, adduser
+Depends: python2.7, python (>= 2.7.0), python (<< 2.8), gcc, python-dev, libffi-dev, libssl-dev, rabbitmq-server, redis-server, adduser, python-twisted, python-dateutil, python-txamqp, python-pyparsing
 Maintainer: Fourat ZOUARI <fourat@gmail.com>
 Homepage: http://www.jasminsms.com
 Bugs: https://github.com/jookies/jasmin/issues
 Description: SMS Gateway
  Jasmin is a very complete open source SMS Gateway with many enterprise-class 
  features such as:
+ .
   - SMPP Client / Server
   - HTTP Client / Server
   - Console-based configuration, no service restart required
@@ -20,6 +21,7 @@ Description: SMS Gateway
   - Supports Unicode (UTF-8) for sending out multilingual SMS
   - Supports easy creation and sending of specialized/binary SMS
   - Supports concatenated SMS strings (long SMS)
+ .
  Jasmin relies heavily on message queuing through message brokers 
  (Using AMQP), it is designed for performance, high traffic loads and full 
  in-memory execution.

@@ -13,8 +13,8 @@ adduser --disabled-login \
 		jasmin
 
 # Create required folders
-mkdir /var/log/jasmin
-mkdir /var/run/jasmin
+[ -d "/var/log/jasmin" ] || mkdir /var/log/jasmin
+[ -d "/var/run/jasmin" ] || mkdir /var/run/jasmin
 
 # Change owner of required folders
 chown jasmin. /etc/jasmin/store/
