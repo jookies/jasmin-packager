@@ -68,5 +68,5 @@ chmod 755 $WORK_DIR/package/usr/bin/jasmind
 
 # Build package
 fakeroot dpkg-deb --build $WORK_DIR/package
-mv $WORK_DIR/package.deb packages/jasmin-$2_all.deb
-lintian packages/jasmin-$2_all.deb
+mv $WORK_DIR/package.deb packages/python-jasmin-$2_all.deb
+lintian packages/python-jasmin-$2_all.deb
