@@ -32,9 +32,10 @@ cp -r $COMMONS_DIR/DEBIAN $WORK_DIR/package/
 mkdir -p $WORK_DIR/package/usr/share/doc/python-jasmin
 cp $COMMONS_DIR/changelog $COMMONS_DIR/copyright $WORK_DIR/package/usr/share/doc/python-jasmin
 cp $WORK_DIR/package/usr/share/doc/python-jasmin/changelog $WORK_DIR/package/usr/share/doc/python-jasmin/changelog.Debian
+cp $WORK_DIR/jasmin-$1/README.rst $WORK_DIR/package/usr/share/doc/python-jasmin/
 gzip --best $WORK_DIR/package/usr/share/doc/python-jasmin/changelog
 gzip --best $WORK_DIR/package/usr/share/doc/python-jasmin/changelog.Debian
-# TODO: include Jasmin documentation
+gzip --best $WORK_DIR/package/usr/share/doc/python-jasmin/README.rst
 
 # Update package version
 sed -i "s/%debversion%/$2/" $WORK_DIR/package/DEBIAN/control
