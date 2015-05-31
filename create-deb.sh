@@ -21,9 +21,12 @@ fi
 [ -d $WORK_DIR ] && rm -rf $WORK_DIR
 mkdir $WORK_DIR $WORK_DIR/package $WORK_DIR/jasmin
 
-# Download jasmin
+# Download and build jasmin
 curl -o $WORK_DIR/jasmin.tgz "$PYPI_BASEURL/jasmin-$1.tar.gz" || exit 11
 tar zxf $WORK_DIR/jasmin.tgz -C $WORK_DIR
+cd $WORK_DIR/jasmin-$1
+python setup.py bdist || exit 12
+cd -
 
 # Prepare work folder
 cp -r $COMMONS_DIR/DEBIAN $WORK_DIR/package/
@@ -48,7 +51,7 @@ cp $WORK_DIR/jasmin-$1/misc/config/init-script/jasmind-ubuntu $WORK_DIR/package/
 
 ## /usr folder
 mkdir -p $WORK_DIR/package/usr/bin $WORK_DIR/package/usr/lib/python2.7/dist-packages
-cp -r $WORK_DIR/jasmin-$1/jasmin $WORK_DIR/package/usr/lib/python2.7/dist-packages/jasmin
+cp -r $WORK_DIR/jasmin-$1/build/lib.*/jasmin $WORK_DIR/package/usr/lib/python2.7/dist-packages/jasmin
 cp $WORK_DIR/package/usr/lib/python2.7/dist-packages/jasmin/bin/jasmind.py $WORK_DIR/package/usr/bin/jasmind
 
 # Remove unneeded files
