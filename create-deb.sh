@@ -1,8 +1,7 @@
 #!/bin/bash
 
-WORK_DIR=/tmp/jasmin-packager
+WORK_DIR=/tmp/jasmin-packager-deb
 COMMONS_DIR=./commons
-PYPI_BASEURL="https://pypi.python.org/packages/source/j/jasmin"
 
 if [ $# -ne 2 ]; then
     echo "Usage: $0 pypi-version debian-version"
@@ -15,6 +14,8 @@ if [ $# -ne 2 ]; then
     exit 1
 fi
 
+PYPI_JASMIN_URL="https://pypi.python.org/packages/source/j/jasmin/jasmin-$1.tar.gz"
+
 [ -d $COMMONS_DIR ] || exit 10
 
 # Reset work folder
@@ -22,7 +23,7 @@ fi
 mkdir $WORK_DIR $WORK_DIR/package $WORK_DIR/jasmin
 
 # Download and build jasmin
-curl -o $WORK_DIR/jasmin.tgz "$PYPI_BASEURL/jasmin-$1.tar.gz" || exit 11
+curl -o $WORK_DIR/jasmin.tgz "$PYPI_JASMIN_URL" || exit 11
 tar zxf $WORK_DIR/jasmin.tgz -C $WORK_DIR
 cd $WORK_DIR/jasmin-$1
 python setup.py bdist || exit 12
