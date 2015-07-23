@@ -4,5 +4,5 @@ set -e
 # stop jasmin server
 if [ -f /etc/init.d/jasmind ]
 then
-  invoke-rc.d jasmind stop
+  invoke-rc.d jasmind stop &> /dev/null
 fi
