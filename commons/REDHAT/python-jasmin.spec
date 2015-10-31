@@ -99,6 +99,6 @@ rm -rf %{buildroot}
 %{python_sitelib}/twisted
 
 %changelog
-* Wed Oct 31 2015 Jookies LTD <jasmin@jookies.net> - %rhversion%
+* Sat Oct 31 2015 Jookies LTD <jasmin@jookies.net> - %rhversion%
 - Implement message interception (GH: #301)
 - Implement filtering using TagFilter (GH: #326)
