@@ -36,7 +36,7 @@ sed -i "s/%pypiversion%/$1/" $WORK_DIR/images/centos7/python-jasmin.spec
 sed -i "s/%rhversion%/$2/" $WORK_DIR/images/centos7/python-jasmin.spec
 echo "FROM centos:7" > $DOCKER_FILE
 echo "VOLUME $WORK_DIR/packages" >> $DOCKER_FILE
-echo "MAINTAINER Fourat ZOUARI <fourat@gmail.com>" >> $DOCKER_FILE
+echo "MAINTAINER Jookies LTD <jasmin@jookies.net>" >> $DOCKER_FILE
 echo "RUN mkdir -p ~/rpmbuild/{RPMS,SRPMS,BUILD,SOURCES,SPECS}" >> $DOCKER_FILE
 echo "ADD ./python-jasmin.spec /rpmbuild/SPECS/python-jasmin.spec" >> $DOCKER_FILE
 echo "RUN yum -y install rpm-build tar python-setuptools gcc bzip2 python-devel python-twisted-core" >> $DOCKER_FILE

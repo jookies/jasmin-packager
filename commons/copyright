@@ -1,6 +1,6 @@
 This is the Debian prepackaged version of "jasmin-server".
 
-This package is currently maintained by Fourat ZOUARI <fourat@gmail.com>
+This package is currently maintained by Jookies LTD
 and built from pypi package obtained from:
 
 pypi.python.org/pypi/jasmin
@@ -9,7 +9,7 @@ The changes were fairly minimal, and consisted solely of adding
 various debian/* files to the distribution, plus several miscellaneous
 commands to add required user and set the start script.
 
-Copyright 2015 Fourat Zouari <fourat@gmail.com>
+Copyright 2014-2016 Jookies LTD <jasmin@jookies.net>
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

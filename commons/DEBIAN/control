@@ -4,11 +4,11 @@ Section: python
 Priority: optional
 Architecture: all
 Depends: python2.7, python (>= 2.7.0), python (<< 2.8), rabbitmq-server, redis-server, adduser, python-twisted-core, python-twisted-web, python-twisted-conch, python-dateutil, python-txamqp, python-pyparsing
-Maintainer: Fourat ZOUARI <fourat@gmail.com>
+Maintainer: Jookies LTD <jasmin@jookies.net>
 Homepage: http://www.jasminsms.com
 Bugs: https://github.com/jookies/jasmin/issues
 Description: SMS Gateway
- Jasmin is a very complete open source SMS Gateway with many enterprise-class 
+ Jasmin is a very complete open source SMS Gateway with many enterprise-class
  features such as:
  .
   - SMPP Client / Server
@@ -22,6 +22,6 @@ Description: SMS Gateway
   - Supports easy creation and sending of specialized/binary SMS
   - Supports concatenated SMS strings (long SMS)
  .
- Jasmin relies heavily on message queuing through message brokers 
- (Using AMQP), it is designed for performance, high traffic loads and full 
+ Jasmin relies heavily on message queuing through message brokers
+ (Using AMQP), it is designed for performance, high traffic loads and full
  in-memory execution.

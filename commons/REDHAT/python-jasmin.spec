@@ -17,7 +17,7 @@ Requires: redhat-lsb-core, initscripts, python >= 2.7.0, rabbitmq-server, redis,
 Requires(pre): /usr/sbin/useradd, /usr/sbin/groupadd, /usr/bin/getent
 
 %description
-Jasmin is a very complete open source SMS Gateway with many enterprise-class 
+Jasmin is a very complete open source SMS Gateway with many enterprise-class
 features such as:
 .
  - SMPP Client / Server
@@ -31,8 +31,8 @@ features such as:
  - Supports easy creation and sending of specialized/binary SMS
  - Supports concatenated SMS strings (long SMS)
 .
-Jasmin relies heavily on message queuing through message brokers 
-(Using AMQP), it is designed for performance, high traffic loads and full 
+Jasmin relies heavily on message queuing through message brokers
+(Using AMQP), it is designed for performance, high traffic loads and full
 in-memory execution.
 
 %pre
@@ -69,7 +69,9 @@ cd jasmin-%pypiversion%
 mv %{buildroot}/usr/bin/jasmind.py %{buildroot}/usr/bin/jasmind
 mkdir %{buildroot}/etc/init.d
 cp misc/config/init-script/jasmind-redhat %{buildroot}/etc/init.d/jasmind
+cp misc/config/init-script/interceptord-redhat %{buildroot}/etc/init.d/interceptord
 chmod +x %{buildroot}/etc/init.d/jasmind
+chmod +x %{buildroot}/etc/init.d/interceptord
 cd ../pyparsing-2.0.3
 %{__python} setup.py install --skip-build --optimize=2 --root=%{buildroot}
 cd ../txAMQP-0.6.2
@@ -84,6 +86,7 @@ rm -rf %{buildroot}
 %defattr(-,root,root,-)
 %config(noreplace) /etc/jasmin
 /etc/init.d/jasmind
+/etc/init.d/interceptord
 /usr/bin/jasmind
 /usr/bin/cftp
 /usr/bin/ckeygen
@@ -96,8 +99,6 @@ rm -rf %{buildroot}
 %{python_sitelib}/twisted
 
 %changelog
-* Wed May 27 2015 Fourat ZOUARI <fourat@gmail.com> - %rhversion%
-- Implement submit_sm retry on failure depending on the error type (for 
-  example ESME_RTHROTTLED ...) (GH: #60)
-- Don't charge messages when sending SMS through SMPP returns an error in 
-  submit_sm_resp (GH: #164)
+* Wed Oct 31 2015 Jookies LTD <jasmin@jookies.net> - %rhversion%
+- Implement message interception (GH: #301)
+- Implement filtering using TagFilter (GH: #326)

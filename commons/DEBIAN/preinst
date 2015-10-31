@@ -6,3 +6,9 @@ if [ -f /etc/init.d/jasmind ]
 then
   invoke-rc.d jasmind stop &> /dev/null
 fi
+
+# stop interceptor server
+if [ -f /etc/init.d/interceptord ]
+then
+  invoke-rc.d interceptord stop &> /dev/null
+fi

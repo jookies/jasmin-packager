@@ -47,8 +47,10 @@ sed -i "s/%debversion%/$2/" $WORK_DIR/package/DEBIAN/control
 ## /etc folder
 mkdir -p $WORK_DIR/package/etc/init.d $WORK_DIR/package/etc/jasmin/resource $WORK_DIR/package/etc/jasmin/store
 cp $WORK_DIR/jasmin-$1/misc/config/jasmin.cfg $WORK_DIR/package/etc/jasmin/
+cp $WORK_DIR/jasmin-$1/misc/config/interceptor.cfg $WORK_DIR/package/etc/jasmin/
 cp $WORK_DIR/jasmin-$1/misc/config/resource/* $WORK_DIR/package/etc/jasmin/resource/
 cp $WORK_DIR/jasmin-$1/misc/config/init-script/jasmind-ubuntu $WORK_DIR/package/etc/init.d/jasmind
+cp $WORK_DIR/jasmin-$1/misc/config/init-script/interceptord-ubuntu $WORK_DIR/package/etc/init.d/interceptord
 
 ## /usr folder
 mkdir -p $WORK_DIR/package/usr/bin $WORK_DIR/package/usr/lib/python2.7/dist-packages
@@ -56,7 +58,7 @@ cp -r $WORK_DIR/jasmin-$1/build/lib.*/jasmin $WORK_DIR/package/usr/lib/python2.7
 cp $WORK_DIR/package/usr/lib/python2.7/dist-packages/jasmin/bin/jasmind.py $WORK_DIR/package/usr/bin/jasmind
 
 # Remove unneeded files
-find $WORK_DIR/package -name ".gitignore" | xargs rm -f 
+find $WORK_DIR/package -name ".gitignore" | xargs rm -f
 
 # Create md5sums
 cd $WORK_DIR/package;find usr -type f -exec md5sum {} \; > md5sums;cd -;mv $WORK_DIR/package/md5sums $WORK_DIR/package/DEBIAN
@@ -69,6 +71,7 @@ chmod 755 $WORK_DIR/package/DEBIAN/postinst
 chmod 755 $WORK_DIR/package/DEBIAN/prerm
 chmod 755 $WORK_DIR/package/DEBIAN/postrm
 chmod 755 $WORK_DIR/package/etc/init.d/jasmind
+chmod 755 $WORK_DIR/package/etc/init.d/interceptord
 chmod 755 $WORK_DIR/package/usr/bin/jasmind
 
 # Build package
