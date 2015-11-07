@@ -6,10 +6,10 @@ Group:                System Environment/Daemons
 License:              Apache2.0
 URL:                  http://www.jasminsms.com
 
-Source0:              jasmin-%pypiversion%.tar.gz
-Source1:              txAMQP-0.6.2.tar.gz
-Source2:              pyparsing-2.0.3.tar.gz
-Source3:              TwistedConch-15.2.1.tar.bz2
+Source0:              https://pypi.python.org/packages/source/j/jasmin/jasmin-%pypiversion%.tar.gz
+Source1:              https://pypi.python.org/packages/source/t/txAMQP/txAMQP-0.6.2.tar.gz
+Source2:              https://pypi.python.org/packages/source/p/pyparsing/pyparsing-2.0.3.tar.gz
+Source3:              http://twistedmatrix.com/Releases/Conch/15.2/TwistedConch-15.2.1.tar.bz2
 BuildArch:            noarch
 BuildRoot:            %(mktemp -ud %{_tmppath}/%{name}-%{version}-%{release}-XXXXXX)
 
