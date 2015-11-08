@@ -77,7 +77,6 @@ cd jasmin-%pypiversion%
 %{__python} setup.py install --skip-build --optimize=2 --root=%{buildroot}
 mkdir -p %{buildroot}/etc/jasmin/store
 mkdir -p %{buildroot}/etc/jasmin/resource
-mkdir -p %{buildroot}/var/log/jasmin
 chmod +x %{buildroot}/usr/bin/jasmind.py
 chmod +x %{buildroot}/usr/bin/interceptord.py
 install -m0644 misc/config/jasmin.cfg %{buildroot}/etc/jasmin/jasmin.cfg
@@ -127,6 +126,7 @@ rm -rf %{buildroot}
 /usr/bin/mailmail
 
 %post
+mkdir /var/log/jasmin
 chown jasmin:jasmin /etc/jasmin/store
 chown jasmin:jasmin /var/log/jasmin
 %systemd_post jasmind.service
