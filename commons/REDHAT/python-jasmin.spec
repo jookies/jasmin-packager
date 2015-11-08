@@ -115,7 +115,7 @@ rm -rf %{buildroot}
 %{_unitdir}/interceptord.service
 %{python_sitelib}/jasmin
 %{python_sitelib}/txamqp
-%{python_sitelib}/zop
+%{python_sitelib}/zope
 %{python_sitelib}/pyparsing.*
 %{python_sitelib}/*.egg-info
 %{python_sitearch}/twisted
