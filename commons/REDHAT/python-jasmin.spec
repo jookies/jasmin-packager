@@ -118,8 +118,9 @@ rm -rf %{buildroot}
 %{python_sitelib}/pyparsing.*
 %{python_sitelib}/*.egg-info
 %{python_sitearch}/zope
+%{python_sitearch}/zope.*
 %{python_sitearch}/twisted
-%{python_sitearch}/Twisted-15.4.0
+%{python_sitearch}/Twisted-*
 /usr/bin/pyhtmlizer
 /usr/bin/tap2deb
 /usr/bin/ckeygen
