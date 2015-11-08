@@ -10,6 +10,7 @@ Source0:              https://pypi.python.org/packages/source/j/jasmin/jasmin-%p
 Source1:              https://pypi.python.org/packages/source/t/txAMQP/txAMQP-0.6.2.tar.gz
 Source2:              https://pypi.python.org/packages/source/p/pyparsing/pyparsing-2.0.3.tar.gz
 Source3:              https://pypi.python.org/packages/source/T/Twisted/Twisted-15.4.0.tar.bz2
+Source4:              https://pypi.python.org/packages/source/z/zope.interface/zope.interface-4.1.3.tar.gz
 BuildArch:            x86_64
 BuildRoot:            %(mktemp -ud %{_tmppath}/%{name}-%{version}-%{release}-XXXXXX)
 
@@ -19,7 +20,7 @@ BuildRequires:        systemd
 Requires(post):       systemd
 Requires(preun):      systemd
 Requires(postun):     systemd
-Requires:             python >= 2.7.0, python-dateutil, python-lockfile
+Requires:             python >= 2.7.0, python-dateutil, python-lockfile, pyOpenSSL
 Requires:             rabbitmq-server, redis
 Requires(pre):        /usr/sbin/useradd, /usr/sbin/groupadd, /usr/bin/getent
 
@@ -58,6 +59,7 @@ in-memory execution.
 %setup -T -D -c -a 1
 %setup -T -D -c -a 2
 %setup -T -D -c -a 3
+%setup -T -D -c -a 4
 
 %build
 cd jasmin-%pypiversion%
@@ -67,6 +69,8 @@ cd ../pyparsing-2.0.3
 cd ../txAMQP-0.6.2
 %{__python} setup.py build
 cd ../Twisted-15.4.0
+%{__python} setup.py build
+cd ../zope.interface-4.1.3
 %{__python} setup.py build
 
 %install
@@ -96,6 +100,8 @@ cd ../txAMQP-0.6.2
 %{__python} setup.py install --skip-build --optimize=2 --root=%{buildroot}
 cd ../Twisted-15.4.0
 %{__python} setup.py install --skip-build --optimize=2 --root=%{buildroot}
+cd ../zope.interface-4.1.3
+%{__python} setup.py install --skip-build --optimize=2 --root=%{buildroot}
 
 %clean
 rm -rf %{buildroot}
@@ -109,6 +115,7 @@ rm -rf %{buildroot}
 %{_unitdir}/interceptord.service
 %{python_sitelib}/jasmin
 %{python_sitelib}/txamqp
+%{python_sitelib}/zop
 %{python_sitelib}/pyparsing.*
 %{python_sitelib}/*.egg-info
 %{python_sitearch}/twisted

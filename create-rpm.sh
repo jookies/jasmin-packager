@@ -20,6 +20,7 @@ PYPI_JASMIN_URL="https://pypi.python.org/packages/source/j/jasmin/jasmin-$1.tar.
 PYPI_TXAMQP_URL="https://pypi.python.org/packages/source/t/txAMQP/txAMQP-0.6.2.tar.gz"
 PYPI_PYPARS_URL="https://pypi.python.org/packages/source/p/pyparsing/pyparsing-2.0.3.tar.gz"
 TWISTED_URL="https://pypi.python.org/packages/source/T/Twisted/Twisted-15.4.0.tar.bz2"
+ZOPE_IFACE_URL="https://pypi.python.org/packages/source/z/zope.interface/zope.interface-4.1.3.tar.gz"
 
 [ -d $COMMONS_DIR ] || exit 10
 
@@ -45,6 +46,7 @@ echo "RUN curl '$PYPI_JASMIN_URL' -o ~/rpmbuild/SOURCES/jasmin-$1.tar.gz" >> $DO
 echo "RUN curl '$PYPI_TXAMQP_URL' -o ~/rpmbuild/SOURCES/txAMQP-0.6.2.tar.gz" >> $DOCKER_FILE
 echo "RUN curl '$PYPI_PYPARS_URL' -o ~/rpmbuild/SOURCES/pyparsing-2.0.3.tar.gz" >> $DOCKER_FILE
 echo "RUN curl '$TWISTED_URL' -o ~/rpmbuild/SOURCES/Twisted-15.4.0.tar.bz2" >> $DOCKER_FILE
+echo "RUN curl '$ZOPE_IFACE_URL' -o ~/rpmbuild/SOURCES/zope.interface-4.1.3.tar.gz" >> $DOCKER_FILE
 echo "RUN rpmbuild -ba ~/rpmbuild/SPECS/python-jasmin.spec" >> $DOCKER_FILE
 
 # Create rpm inside a centos 7 container
