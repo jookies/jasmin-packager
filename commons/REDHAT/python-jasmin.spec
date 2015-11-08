@@ -9,17 +9,17 @@ URL:                  http://www.jasminsms.com
 Source0:              https://pypi.python.org/packages/source/j/jasmin/jasmin-%pypiversion%.tar.gz
 Source1:              https://pypi.python.org/packages/source/t/txAMQP/txAMQP-0.6.2.tar.gz
 Source2:              https://pypi.python.org/packages/source/p/pyparsing/pyparsing-2.0.3.tar.gz
-Source3:              http://twistedmatrix.com/Releases/Conch/15.2/TwistedConch-15.2.1.tar.bz2
-BuildArch:            noarch
+Source3:              https://pypi.python.org/packages/source/T/Twisted/Twisted-15.4.0.tar.bz2
+BuildArch:            x86_64
 BuildRoot:            %(mktemp -ud %{_tmppath}/%{name}-%{version}-%{release}-XXXXXX)
 
-BuildRequires:        python-setuptools, python-devel, python-twisted-core
+BuildRequires:        python-setuptools
 BuildRequires:        tar, gcc, bzip2
 BuildRequires:        systemd
 Requires(post):       systemd
 Requires(preun):      systemd
 Requires(postun):     systemd
-Requires:             python >= 2.7.0, python-dateutil, python-twisted-core, python-twisted-web
+Requires:             python >= 2.7.0, python-dateutil, python-lockfile
 Requires:             rabbitmq-server, redis
 Requires(pre):        /usr/sbin/useradd, /usr/sbin/groupadd, /usr/bin/getent
 
@@ -43,12 +43,12 @@ Jasmin relies heavily on message queuing through message brokers
 in-memory execution.
 
 %pre
-/usr/bin/getent group jasmin || /usr/sbin/groupadd --system jasmin
-/usr/bin/getent passwd jasmin || /usr/sbin/useradd \
+/usr/bin/getent group jasmin > /dev/null || /usr/sbin/groupadd --system jasmin
+/usr/bin/getent passwd jasmin > /dev/null || /usr/sbin/useradd \
   --system \
   --home-dir /usr/lib/jasmin \
   --no-create-home \
-  --comment "Jasmin" \
+  --comment "Jasmin SMS Gateway" \
   --shell /sbin/nologin \
   --gid jasmin \
   jasmin
@@ -66,7 +66,7 @@ cd ../pyparsing-2.0.3
 %{__python} setup.py build
 cd ../txAMQP-0.6.2
 %{__python} setup.py build
-cd ../TwistedConch-15.2.1
+cd ../Twisted-15.4.0
 %{__python} setup.py build
 
 %install
@@ -78,8 +78,6 @@ cd jasmin-%pypiversion%
 mkdir -p %{buildroot}/etc/jasmin/store
 mkdir -p %{buildroot}/etc/jasmin/resource
 mkdir -p %{buildroot}/var/log/jasmin
-chown jasmin:jasmin %{buildroot}/etc/jasmin/store
-chown jasmin:jasmin %{buildroot}/var/log/jasmin
 chmod +x %{buildroot}/usr/bin/jasmind.py
 chmod +x %{buildroot}/usr/bin/interceptord.py
 install -m0644 misc/config/jasmin.cfg %{buildroot}/etc/jasmin/jasmin.cfg
@@ -97,7 +95,7 @@ cd ../pyparsing-2.0.3
 %{__python} setup.py install --skip-build --optimize=2 --root=%{buildroot}
 cd ../txAMQP-0.6.2
 %{__python} setup.py install --skip-build --optimize=2 --root=%{buildroot}
-cd ../TwistedConch-15.2.1
+cd ../Twisted-15.4.0
 %{__python} setup.py install --skip-build --optimize=2 --root=%{buildroot}
 
 %clean
@@ -110,17 +108,27 @@ rm -rf %{buildroot}
 /usr/bin/interceptord.py
 %{_unitdir}/jasmind.service
 %{_unitdir}/interceptord.service
-/usr/bin/cftp
-/usr/bin/ckeygen
-/usr/bin/conch
-/usr/bin/tkconch
 %{python_sitelib}/jasmin
 %{python_sitelib}/txamqp
 %{python_sitelib}/pyparsing.*
 %{python_sitelib}/*.egg-info
-%{python_sitelib}/twisted
+%{python_sitearch}/twisted
+%{python_sitearch}/Twisted-*
+/usr/bin/pyhtmlizer
+/usr/bin/tap2deb
+/usr/bin/ckeygen
+/usr/bin/conch
+/usr/bin/tkconch
+/usr/bin/twistd
+/usr/bin/cftp
+/usr/bin/manhole
+/usr/bin/tap2rpm
+/usr/bin/trial
+/usr/bin/mailmail
 
 %post
+chown jasmin:jasmin /etc/jasmin/store
+chown jasmin:jasmin /var/log/jasmin
 %systemd_post jasmind.service
 %systemd_post interceptord.service
 

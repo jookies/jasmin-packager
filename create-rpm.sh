@@ -19,7 +19,7 @@ fi
 PYPI_JASMIN_URL="https://pypi.python.org/packages/source/j/jasmin/jasmin-$1.tar.gz"
 PYPI_TXAMQP_URL="https://pypi.python.org/packages/source/t/txAMQP/txAMQP-0.6.2.tar.gz"
 PYPI_PYPARS_URL="https://pypi.python.org/packages/source/p/pyparsing/pyparsing-2.0.3.tar.gz"
-TWISTED_CONCH_URL="http://twistedmatrix.com/Releases/Conch/15.2/TwistedConch-15.2.1.tar.bz2"
+TWISTED_URL="https://pypi.python.org/packages/source/T/Twisted/Twisted-15.4.0.tar.bz2"
 
 [ -d $COMMONS_DIR ] || exit 10
 
@@ -39,12 +39,12 @@ echo "VOLUME $WORK_DIR/packages" >> $DOCKER_FILE
 echo "MAINTAINER Jookies LTD <jasmin@jookies.net>" >> $DOCKER_FILE
 echo "RUN mkdir -p ~/rpmbuild/{RPMS,SRPMS,BUILD,SOURCES,SPECS}" >> $DOCKER_FILE
 echo "ADD ./python-jasmin.spec /rpmbuild/SPECS/python-jasmin.spec" >> $DOCKER_FILE
-echo "RUN yum -y install rpm-build tar python-setuptools gcc bzip2 python-devel python-twisted-core" >> $DOCKER_FILE
+echo "RUN yum -y install rpm-build tar python-setuptools gcc bzip2 python-devel" >> $DOCKER_FILE
 echo "RUN curl 'https://bootstrap.pypa.io/get-pip.py'|python" >> $DOCKER_FILE
 echo "RUN curl '$PYPI_JASMIN_URL' -o ~/rpmbuild/SOURCES/jasmin-$1.tar.gz" >> $DOCKER_FILE
 echo "RUN curl '$PYPI_TXAMQP_URL' -o ~/rpmbuild/SOURCES/txAMQP-0.6.2.tar.gz" >> $DOCKER_FILE
 echo "RUN curl '$PYPI_PYPARS_URL' -o ~/rpmbuild/SOURCES/pyparsing-2.0.3.tar.gz" >> $DOCKER_FILE
-echo "RUN curl '$TWISTED_CONCH_URL' -o ~/rpmbuild/SOURCES/TwistedConch-15.2.1.tar.bz2" >> $DOCKER_FILE
+echo "RUN curl '$TWISTED_URL' -o ~/rpmbuild/SOURCES/Twisted-15.4.0.tar.bz2" >> $DOCKER_FILE
 echo "RUN rpmbuild -ba ~/rpmbuild/SPECS/python-jasmin.spec" >> $DOCKER_FILE
 
 # Create rpm inside a centos 7 container
