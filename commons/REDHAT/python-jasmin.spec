@@ -43,84 +43,94 @@ Jasmin relies heavily on message queuing through message brokers
 in-memory execution.
 
 %pre
-  /usr/bin/getent group jasmin || /usr/sbin/groupadd --system jasmin
-  /usr/bin/getent passwd jasmin || /usr/sbin/useradd \
-    --system \
-    --home-dir /usr/lib/jasmin \
-    --no-create-home \
-    --comment "Jasmin" \
-    --shell /sbin/nologin \
-    --gid jasmin \
-    jasmin
+/usr/bin/getent group jasmin || /usr/sbin/groupadd --system jasmin
+/usr/bin/getent passwd jasmin || /usr/sbin/useradd \
+  --system \
+  --home-dir /usr/lib/jasmin \
+  --no-create-home \
+  --comment "Jasmin" \
+  --shell /sbin/nologin \
+  --gid jasmin \
+  jasmin
 
 %prep
-  %setup -T -c -a 0
-  %setup -T -D -c -a 1
-  %setup -T -D -c -a 2
-  %setup -T -D -c -a 3
+%setup -T -c -a 0
+%setup -T -D -c -a 1
+%setup -T -D -c -a 2
+%setup -T -D -c -a 3
 
 %build
-  cd jasmin-%pypiversion%
-  %{__python} setup.py build
-  cd ../pyparsing-2.0.3
-  %{__python} setup.py build
-  cd ../txAMQP-0.6.2
-  %{__python} setup.py build
-  cd ../TwistedConch-15.2.1
-  %{__python} setup.py build
+cd jasmin-%pypiversion%
+%{__python} setup.py build
+cd ../pyparsing-2.0.3
+%{__python} setup.py build
+cd ../txAMQP-0.6.2
+%{__python} setup.py build
+cd ../TwistedConch-15.2.1
+%{__python} setup.py build
 
 %install
-  rm -rf %{buildroot}
-  cd jasmin-%pypiversion%
+rm -rf %{buildroot}
+cd jasmin-%pypiversion%
 
-  # Install systemd units for Jasmin
-  mkdir -p %{buildroot}/%{_unitdir}
-  cp misc/config/systemd/*.service %{buildroot}/%{_unitdir}/
+# Install Jasmin
+%{__python} setup.py install --skip-build --optimize=2 --root=%{buildroot}
+mkdir -p %{buildroot}/etc/jasmin/store
+mkdir -p %{buildroot}/etc/jasmin/resource
+mkdir -p %{buildroot}/var/log/jasmin
+chown jasmin:jasmin %{buildroot}/etc/jasmin/store
+chown jasmin:jasmin %{buildroot}/var/log/jasmin
+chmod +x %{buildroot}/usr/bin/jasmind.py
+chmod +x %{buildroot}/usr/bin/interceptord.py
+install -m0644 misc/config/jasmin.cfg %{buildroot}/etc/jasmin/jasmin.cfg
+install -m0644 misc/config/interceptor.cfg %{buildroot}/etc/jasmin/interceptor.cfg
+install -m0644 misc/config/resource/amqp0-9-1.xml %{buildroot}/etc/jasmin/resource/amqp0-9-1.xml
+install -m0644 misc/config/resource/amqp0-8.stripped.rabbitmq.xml %{buildroot}/etc/jasmin/resource/amqp0-8.stripped.rabbitmq.xml
 
-  # Install Jasmin
-  %{__python} setup.py install --skip-build --optimize=2 --root=%{buildroot}
-  mv %{buildroot}/usr/bin/jasmind.py %{buildroot}/usr/bin/jasmind.py
-  mv %{buildroot}/usr/bin/interceptord.py %{buildroot}/usr/bin/interceptord.py
-  chmod +x %{buildroot}/usr/bin/jasmind.py
-  chmod +x %{buildroot}/usr/bin/interceptord.py
+# Install systemd units for Jasmin
+mkdir -p %{buildroot}/%{_unitdir}
+install -m0644 misc/config/systemd/jasmind.service %{buildroot}/%{_unitdir}/jasmind.service
+install -m0644 misc/config/systemd/interceptord.service %{buildroot}/%{_unitdir}/interceptord.service
 
-  # Install other requirements
-  cd ../pyparsing-2.0.3
-  %{__python} setup.py install --skip-build --optimize=2 --root=%{buildroot}
-  cd ../txAMQP-0.6.2
-  %{__python} setup.py install --skip-build --optimize=2 --root=%{buildroot}
-  cd ../TwistedConch-15.2.1
-  %{__python} setup.py install --skip-build --optimize=2 --root=%{buildroot}
+# Install other requirements
+cd ../pyparsing-2.0.3
+%{__python} setup.py install --skip-build --optimize=2 --root=%{buildroot}
+cd ../txAMQP-0.6.2
+%{__python} setup.py install --skip-build --optimize=2 --root=%{buildroot}
+cd ../TwistedConch-15.2.1
+%{__python} setup.py install --skip-build --optimize=2 --root=%{buildroot}
 
 %clean
-  rm -rf %{buildroot}
+rm -rf %{buildroot}
 
 %files
-  %defattr(-,root,root,-)
-  %config(noreplace) /etc/jasmin
-  /usr/bin/jasmind.py
-  /usr/bin/interceptord.py
-  /usr/bin/cftp
-  /usr/bin/ckeygen
-  /usr/bin/conch
-  /usr/bin/tkconch
-  %{python_sitelib}/jasmin
-  %{python_sitelib}/txamqp
-  %{python_sitelib}/pyparsing.*
-  %{python_sitelib}/*.egg-info
-  %{python_sitelib}/twisted
+%defattr(-,root,root,-)
+%config(noreplace) /etc/jasmin
+/usr/bin/jasmind.py
+/usr/bin/interceptord.py
+%{_unitdir}/jasmind.service
+%{_unitdir}/interceptord.service
+/usr/bin/cftp
+/usr/bin/ckeygen
+/usr/bin/conch
+/usr/bin/tkconch
+%{python_sitelib}/jasmin
+%{python_sitelib}/txamqp
+%{python_sitelib}/pyparsing.*
+%{python_sitelib}/*.egg-info
+%{python_sitelib}/twisted
 
 %post
-  %systemd_post jasmind.service
-  %systemd_post interceptord.service
+%systemd_post jasmind.service
+%systemd_post interceptord.service
 
 %preun
-  %systemd_preun jasmind.service
-  %systemd_preun interceptord.service
+%systemd_preun jasmind.service
+%systemd_preun interceptord.service
 
 %postun
-  %systemd_postun_with_restart jasmind.service
-  %systemd_postun_with_restart interceptord.service
+%systemd_postun_with_restart jasmind.service
+%systemd_postun_with_restart interceptord.service
 
 %changelog
 * Sat Oct 31 2015 Jookies LTD <jasmin@jookies.net> - %rhversion%
