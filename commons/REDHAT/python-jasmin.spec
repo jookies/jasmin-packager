@@ -115,11 +115,11 @@ rm -rf %{buildroot}
 %{_unitdir}/interceptord.service
 %{python_sitelib}/jasmin
 %{python_sitelib}/txamqp
-%{python_sitelib}/zope
 %{python_sitelib}/pyparsing.*
 %{python_sitelib}/*.egg-info
+%{python_sitearch}/zope
 %{python_sitearch}/twisted
-%{python_sitearch}/Twisted-*
+%{python_sitearch}/Twisted-15.4.0
 /usr/bin/pyhtmlizer
 /usr/bin/tap2deb
 /usr/bin/ckeygen
