@@ -49,7 +49,7 @@ echo "RUN rpmbuild -ba ~/rpmbuild/SPECS/python-jasmin.spec" >> $DOCKER_FILE
 
 # Create rpm inside a centos 7 container
 docker build --rm=true -t jasmin-centos7-rpm $WORK_DIR/images/centos7
-docker run --rm -v $WORK_DIR/packages:/tmp/packages -it jasmin-centos7-rpm /bin/sh -c 'cp /rpmbuild/RPMS/noarch/*.rpm /tmp/packages'
+docker run --rm -v $WORK_DIR/packages:/tmp/packages -it jasmin-centos7-rpm /bin/sh -c 'cp /rpmbuild/RPMS/x86_64/*.rpm /tmp/packages'
 docker rmi -f jasmin-centos7-rpm
 
 # Get packages
