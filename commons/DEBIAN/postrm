@@ -10,7 +10,14 @@ fi
 
 if [ "$1" = "remove" ]; then
     # remove jasmind start script
-    update-rc.d -f jasmind remove >/dev/null
+    systemctl stop jasmind
+    systemctl disable jasmind
+fi
+
+if [ "$1" = "remove" ]; then
+    # remove interceptord start script
+    systemctl stop interceptord
+    systemctl disable interceptord
 fi
 
 exit 0

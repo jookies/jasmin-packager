@@ -1,6 +1,5 @@
-jasmin-server (0.7.0-1) unstable; urgency=low
+jasmin-server (0.7.0-1) vivid wily xenial; urgency=low
 
-  * Implement message interception
-  * Implement filtering using TagFilter
+  * TODO: correct changelog for deb packaging
 
- -- Jookies LTD <jasmin@jookies.net>  Wed, 31 Oct 2015 11:50:00 +0100
+ -- Jookies LTD <jasmin@jookies.net>  Sat, 31 Oct 2015 11:50:00 +0100

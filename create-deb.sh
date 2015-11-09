@@ -45,17 +45,19 @@ gzip --best $WORK_DIR/package/usr/share/doc/python-jasmin/README.rst
 sed -i "s/%debversion%/$2/" $WORK_DIR/package/DEBIAN/control
 
 ## /etc folder
-mkdir -p $WORK_DIR/package/etc/init.d $WORK_DIR/package/etc/jasmin/resource $WORK_DIR/package/etc/jasmin/store
+mkdir -p $WORK_DIR/package/etc/jasmin/resource $WORK_DIR/package/etc/jasmin/store
 cp $WORK_DIR/jasmin-$1/misc/config/jasmin.cfg $WORK_DIR/package/etc/jasmin/
 cp $WORK_DIR/jasmin-$1/misc/config/interceptor.cfg $WORK_DIR/package/etc/jasmin/
 cp $WORK_DIR/jasmin-$1/misc/config/resource/* $WORK_DIR/package/etc/jasmin/resource/
-cp $WORK_DIR/jasmin-$1/misc/config/init-script/jasmind-ubuntu $WORK_DIR/package/etc/init.d/jasmind
-cp $WORK_DIR/jasmin-$1/misc/config/init-script/interceptord-ubuntu $WORK_DIR/package/etc/init.d/interceptord
 
 ## /usr folder
 mkdir -p $WORK_DIR/package/usr/bin $WORK_DIR/package/usr/lib/python2.7/dist-packages
 cp -r $WORK_DIR/jasmin-$1/build/lib.*/jasmin $WORK_DIR/package/usr/lib/python2.7/dist-packages/jasmin
 cp $WORK_DIR/package/usr/lib/python2.7/dist-packages/jasmin/bin/jasmind.py $WORK_DIR/package/usr/bin/jasmind
+
+## /lib folder
+mkdir -p $WORK_DIR/package/lib/systemd/system
+cp $WORK_DIR/jasmin-$1/misc/config/systemd/*.service $WORK_DIR/package/lib/systemd/system/
 
 # Remove unneeded files
 find $WORK_DIR/package -name ".gitignore" | xargs rm -f
@@ -70,8 +72,8 @@ chmod 755 $WORK_DIR/package/DEBIAN/preinst
 chmod 755 $WORK_DIR/package/DEBIAN/postinst
 chmod 755 $WORK_DIR/package/DEBIAN/prerm
 chmod 755 $WORK_DIR/package/DEBIAN/postrm
-chmod 755 $WORK_DIR/package/etc/init.d/jasmind
-chmod 755 $WORK_DIR/package/etc/init.d/interceptord
+chmod 755 $WORK_DIR/package/DEBIAN/compat
+chmod 755 $WORK_DIR/package/lib/systemd/system/*.service
 chmod 755 $WORK_DIR/package/usr/bin/jasmind
 
 # Build package
