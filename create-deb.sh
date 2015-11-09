@@ -63,7 +63,11 @@ cp $WORK_DIR/jasmin-$1/misc/config/systemd/*.service $WORK_DIR/package/lib/syste
 find $WORK_DIR/package -name ".gitignore" | xargs rm -f
 
 # Create md5sums
-cd $WORK_DIR/package;find usr -type f -exec md5sum {} \; > md5sums;cd -;mv $WORK_DIR/package/md5sums $WORK_DIR/package/DEBIAN
+cd $WORK_DIR/package;
+find usr -type f -exec md5sum {} \; > md5sums
+find lib -type f -exec md5sum {} \; >> md5sums
+cd -
+mv $WORK_DIR/package/md5sums $WORK_DIR/package/DEBIAN
 
 # Fix file & folder permissions
 find $WORK_DIR/package -type d | xargs chmod 755
@@ -72,7 +76,6 @@ chmod 755 $WORK_DIR/package/DEBIAN/preinst
 chmod 755 $WORK_DIR/package/DEBIAN/postinst
 chmod 755 $WORK_DIR/package/DEBIAN/prerm
 chmod 755 $WORK_DIR/package/DEBIAN/postrm
-chmod 755 $WORK_DIR/package/DEBIAN/compat
 chmod 755 $WORK_DIR/package/lib/systemd/system/*.service
 chmod 755 $WORK_DIR/package/usr/bin/jasmind
 

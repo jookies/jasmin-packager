@@ -3,10 +3,10 @@ set -e
 
 # stop jasmind server
 if [ -f /lib/systemd/system/jasmind.service ]; then
-  systemctl stop jasmind &> /dev/null
+  systemctl stop jasmind
 fi
 
 # stop interceptord server
 if [ -f /lib/systemd/system/interceptord.service ]; then
-  systemctl stop interceptord &> /dev/null
+  systemctl stop interceptord
 fi
