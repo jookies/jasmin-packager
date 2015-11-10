@@ -76,7 +76,6 @@ chmod 755 $WORK_DIR/package/DEBIAN/preinst
 chmod 755 $WORK_DIR/package/DEBIAN/postinst
 chmod 755 $WORK_DIR/package/DEBIAN/prerm
 chmod 755 $WORK_DIR/package/DEBIAN/postrm
-chmod 755 $WORK_DIR/package/lib/systemd/system/*.service
 chmod 755 $WORK_DIR/package/usr/bin/jasmind
 
 # Build package

@@ -27,8 +27,8 @@ fi
 
 # Install init script
 if [ -x "/lib/systemd/system/interceptord.service" ]; then
-	systemctl interceptord jasmind
-	systemctl interceptord jasmind || exit $?
+	systemctl enable interceptord
+	systemctl start interceptord || exit $?
 fi
 
 exit 0
