@@ -53,7 +53,8 @@ cp $WORK_DIR/jasmin-$1/misc/config/resource/* $WORK_DIR/package/etc/jasmin/resou
 ## /usr folder
 mkdir -p $WORK_DIR/package/usr/bin $WORK_DIR/package/usr/lib/python2.7/dist-packages
 cp -r $WORK_DIR/jasmin-$1/build/lib.*/jasmin $WORK_DIR/package/usr/lib/python2.7/dist-packages/jasmin
-cp $WORK_DIR/package/usr/lib/python2.7/dist-packages/jasmin/bin/jasmind.py $WORK_DIR/package/usr/bin/jasmind
+cp $WORK_DIR/package/usr/lib/python2.7/dist-packages/jasmin/bin/jasmind.py $WORK_DIR/package/usr/bin/
+cp $WORK_DIR/package/usr/lib/python2.7/dist-packages/jasmin/bin/jasmind.py $WORK_DIR/package/usr/bin/
 
 ## /lib folder
 mkdir -p $WORK_DIR/package/lib/systemd/system
@@ -76,7 +77,8 @@ chmod 755 $WORK_DIR/package/DEBIAN/preinst
 chmod 755 $WORK_DIR/package/DEBIAN/postinst
 chmod 755 $WORK_DIR/package/DEBIAN/prerm
 chmod 755 $WORK_DIR/package/DEBIAN/postrm
-chmod 755 $WORK_DIR/package/usr/bin/jasmind
+chmod 755 $WORK_DIR/package/usr/bin/jasmind.py
+chmod 755 $WORK_DIR/package/usr/bin/interceptord.py
 
 # Build package
 fakeroot dpkg-deb --build $WORK_DIR/package
