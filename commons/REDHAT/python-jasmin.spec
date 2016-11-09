@@ -91,7 +91,8 @@ install -m0644 misc/config/resource/amqp0-8.stripped.rabbitmq.xml %{buildroot}/e
 # Install systemd units for Jasmin
 mkdir -p %{buildroot}/%{_unitdir}
 install -m0644 misc/config/systemd/jasmind.service %{buildroot}/%{_unitdir}/jasmind.service
-install -m0644 misc/config/systemd/interceptord.service %{buildroot}/%{_unitdir}/interceptord.service
+install -m0644 misc/config/systemd/jasmin-interceptord.service %{buildroot}/%{_unitdir}/jasmin-interceptord.service
+install -m0644 misc/config/systemd/jasmin-dlrd.service %{buildroot}/%{_unitdir}/jasmin-dlrd.service
 
 # Install other requirements
 cd ../pyparsing-2.0.3
@@ -112,7 +113,8 @@ rm -rf %{buildroot}
 /usr/bin/jasmind.py
 /usr/bin/interceptord.py
 %{_unitdir}/jasmind.service
-%{_unitdir}/interceptord.service
+%{_unitdir}/jasmin-interceptord.service
+%{_unitdir}/jasmin-dlrd.service
 %{python_sitelib}/jasmin
 %{python_sitelib}/txamqp
 %{python_sitelib}/pyparsing.*
@@ -138,15 +140,18 @@ mkdir /var/log/jasmin
 chown jasmin:jasmin /etc/jasmin/store
 chown jasmin:jasmin /var/log/jasmin
 %systemd_post jasmind.service
-%systemd_post interceptord.service
+%systemd_post jasmin-interceptord.service
+%systemd_post jasmin-dlrd.service
 
 %preun
 %systemd_preun jasmind.service
-%systemd_preun interceptord.service
+%systemd_preun jasmin-interceptord.service
+%systemd_preun jasmin-dlrd.service
 
 %postun
 %systemd_postun_with_restart jasmind.service
-%systemd_postun_with_restart interceptord.service
+%systemd_postun_with_restart jasmin-interceptord.service
+%systemd_postun_with_restart jasmin-dlrd.service
 
 %changelog
 * Sat Oct 31 2015 Jookies LTD <jasmin@jookies.net> - %rhversion%
