@@ -84,6 +84,7 @@ mkdir -p %{buildroot}/etc/jasmin/resource
 chmod +x %{buildroot}/usr/bin/jasmind.py
 chmod +x %{buildroot}/usr/bin/interceptord.py
 chmod +x %{buildroot}/usr/bin/dlrd.py
+chmod +x %{buildroot}/usr/bin/dlrlookupd.py
 install -m0644 misc/config/jasmin.cfg %{buildroot}/etc/jasmin/jasmin.cfg
 install -m0644 misc/config/interceptor.cfg %{buildroot}/etc/jasmin/interceptor.cfg
 install -m0644 misc/config/resource/amqp0-9-1.xml %{buildroot}/etc/jasmin/resource/amqp0-9-1.xml
@@ -94,6 +95,7 @@ mkdir -p %{buildroot}/%{_unitdir}
 install -m0644 misc/config/systemd/jasmind.service %{buildroot}/%{_unitdir}/jasmind.service
 install -m0644 misc/config/systemd/jasmin-interceptord.service %{buildroot}/%{_unitdir}/jasmin-interceptord.service
 install -m0644 misc/config/systemd/jasmin-dlrd.service %{buildroot}/%{_unitdir}/jasmin-dlrd.service
+install -m0644 misc/config/systemd/jasmin-dlrlookupd.service %{buildroot}/%{_unitdir}/jasmin-dlrlookupd.service
 
 # Install other requirements
 cd ../pyparsing-2.0.3
@@ -114,9 +116,11 @@ rm -rf %{buildroot}
 /usr/bin/jasmind.py
 /usr/bin/interceptord.py
 /usr/bin/dlrd.py
+/usr/bin/dlrlookupd.py
 %{_unitdir}/jasmind.service
 %{_unitdir}/jasmin-interceptord.service
 %{_unitdir}/jasmin-dlrd.service
+%{_unitdir}/jasmin-dlrlookupd.service
 %{python_sitelib}/jasmin
 %{python_sitelib}/txamqp
 %{python_sitelib}/pyparsing.*
@@ -144,16 +148,19 @@ chown jasmin:jasmin /var/log/jasmin
 %systemd_post jasmind.service
 %systemd_post jasmin-interceptord.service
 %systemd_post jasmin-dlrd.service
+%systemd_post jasmin-dlrlookupd.service
 
 %preun
 %systemd_preun jasmind.service
 %systemd_preun jasmin-interceptord.service
 %systemd_preun jasmin-dlrd.service
+%systemd_preun jasmin-dlrlookupd.service
 
 %postun
 %systemd_postun_with_restart jasmind.service
 %systemd_postun_with_restart jasmin-interceptord.service
 %systemd_postun_with_restart jasmin-dlrd.service
+%systemd_postun_with_restart jasmin-dlrlookupd.service
 
 %changelog
 * Sat Oct 31 2015 Jookies LTD <jasmin@jookies.net> - %rhversion%
