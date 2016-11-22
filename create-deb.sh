@@ -14,7 +14,8 @@ if [ $# -ne 2 ]; then
     exit 1
 fi
 
-PYPI_JASMIN_URL="https://pypi.python.org/packages/source/j/jasmin/jasmin-$1.tar.gz"
+#PYPI_JASMIN_URL="https://pypi.python.org/packages/source/j/jasmin/jasmin-$1.tar.gz"
+PYPI_JASMIN_URL="https://pypi.python.org/packages/17/39/9dfd87363596f8ad6e7cc8eb0461009ca63cece5610988088f12c600974b/jasmin-0.9b15.tar.gz"
 
 [ -d $COMMONS_DIR ] || exit 10
 
