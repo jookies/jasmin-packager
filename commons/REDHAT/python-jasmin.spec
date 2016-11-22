@@ -83,6 +83,7 @@ mkdir -p %{buildroot}/etc/jasmin/store
 mkdir -p %{buildroot}/etc/jasmin/resource
 chmod +x %{buildroot}/usr/bin/jasmind.py
 chmod +x %{buildroot}/usr/bin/interceptord.py
+chmod +x %{buildroot}/usr/bin/dlrd.py
 install -m0644 misc/config/jasmin.cfg %{buildroot}/etc/jasmin/jasmin.cfg
 install -m0644 misc/config/interceptor.cfg %{buildroot}/etc/jasmin/interceptor.cfg
 install -m0644 misc/config/resource/amqp0-9-1.xml %{buildroot}/etc/jasmin/resource/amqp0-9-1.xml
@@ -112,6 +113,7 @@ rm -rf %{buildroot}
 %config(noreplace) /etc/jasmin
 /usr/bin/jasmind.py
 /usr/bin/interceptord.py
+/usr/bin/dlrd.py
 %{_unitdir}/jasmind.service
 %{_unitdir}/jasmin-interceptord.service
 %{_unitdir}/jasmin-dlrd.service
