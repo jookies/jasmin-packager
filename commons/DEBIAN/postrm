@@ -16,8 +16,14 @@ fi
 
 if [ "$1" = "remove" ]; then
     # remove interceptord start script
-    systemctl stop interceptord
-    systemctl disable interceptord
+    systemctl stop jasmin-interceptord
+    systemctl disable jasmin-interceptord
+    # remove dlrd start script
+    systemctl stop jasmin-dlrd
+    systemctl disable jasmin-dlrd
+    # remove dlrlookupd start script
+    systemctl stop jasmin-dlrlookupd
+    systemctl disable jasmin-dlrlookupd
 fi
 
 exit 0

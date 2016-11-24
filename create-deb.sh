@@ -49,6 +49,8 @@ sed -i "s/%debversion%/$2/" $WORK_DIR/package/DEBIAN/control
 mkdir -p $WORK_DIR/package/etc/jasmin/resource $WORK_DIR/package/etc/jasmin/store
 cp $WORK_DIR/jasmin-$1/misc/config/jasmin.cfg $WORK_DIR/package/etc/jasmin/
 cp $WORK_DIR/jasmin-$1/misc/config/interceptor.cfg $WORK_DIR/package/etc/jasmin/
+cp $WORK_DIR/jasmin-$1/misc/config/dlrlookupd.cfg $WORK_DIR/package/etc/jasmin/
+cp $WORK_DIR/jasmin-$1/misc/config/dlr.cfg $WORK_DIR/package/etc/jasmin/
 cp $WORK_DIR/jasmin-$1/misc/config/resource/* $WORK_DIR/package/etc/jasmin/resource/
 
 ## /usr folder
@@ -56,6 +58,8 @@ mkdir -p $WORK_DIR/package/usr/bin $WORK_DIR/package/usr/lib/python2.7/dist-pack
 cp -r $WORK_DIR/jasmin-$1/build/lib.*/jasmin $WORK_DIR/package/usr/lib/python2.7/dist-packages/jasmin
 cp $WORK_DIR/package/usr/lib/python2.7/dist-packages/jasmin/bin/jasmind.py $WORK_DIR/package/usr/bin/
 cp $WORK_DIR/package/usr/lib/python2.7/dist-packages/jasmin/bin/interceptord.py $WORK_DIR/package/usr/bin/
+cp $WORK_DIR/package/usr/lib/python2.7/dist-packages/jasmin/bin/dlrd.py $WORK_DIR/package/usr/bin/
+cp $WORK_DIR/package/usr/lib/python2.7/dist-packages/jasmin/bin/dlrlookupd.py $WORK_DIR/package/usr/bin/
 
 ## /lib folder
 mkdir -p $WORK_DIR/package/lib/systemd/system
@@ -80,6 +84,8 @@ chmod 755 $WORK_DIR/package/DEBIAN/prerm
 chmod 755 $WORK_DIR/package/DEBIAN/postrm
 chmod 755 $WORK_DIR/package/usr/bin/jasmind.py
 chmod 755 $WORK_DIR/package/usr/bin/interceptord.py
+chmod 755 $WORK_DIR/package/usr/bin/dlrd.py
+chmod 755 $WORK_DIR/package/usr/bin/dlrlookupd.py
 
 # Build package
 fakeroot dpkg-deb --build $WORK_DIR/package

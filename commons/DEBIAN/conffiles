@@ -1,4 +1,6 @@
 /etc/jasmin/jasmin.cfg
 /etc/jasmin/interceptor.cfg
+/etc/jasmin/dlr.cfg
+/etc/jasmin/dlrlookupd.cfg
 /etc/jasmin/resource/amqp0-9-1.xml
 /etc/jasmin/resource/amqp0-8.stripped.rabbitmq.xml

@@ -7,6 +7,16 @@ if [ -f /lib/systemd/system/jasmind.service ]; then
 fi
 
 # stop interceptor server
-if [ -f /lib/systemd/system/interceptord.service ]; then
-  systemctl stop interceptord
+if [ -f /lib/systemd/system/jasmin-interceptord.service ]; then
+  systemctl stop jasmin-interceptord
+fi
+
+# stop dlrd server
+if [ -f /lib/systemd/system/jasmin-dlrd.service ]; then
+  systemctl stop jasmin-dlrd
+fi
+
+# stop dlrlookupd server
+if [ -f /lib/systemd/system/jasmin-dlrlookupd.service ]; then
+  systemctl stop jasmin-dlrlookupd
 fi

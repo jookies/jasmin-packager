@@ -26,9 +26,21 @@ if [ -x "/lib/systemd/system/jasmind.service" ]; then
 fi
 
 # Install init script
-if [ -x "/lib/systemd/system/interceptord.service" ]; then
-	systemctl enable interceptord
-	systemctl start interceptord || exit $?
+if [ -x "/lib/systemd/system/jasmin-interceptord.service" ]; then
+	systemctl enable jasmin-interceptord
+	systemctl start jasmin-interceptord || exit $?
+fi
+
+# Install init script
+if [ -x "/lib/systemd/system/jasmin-dlrd.service" ]; then
+	systemctl enable jasmin-dlrd
+	systemctl start jasmin-dlrd || exit $?
+fi
+
+# Install init script
+if [ -x "/lib/systemd/system/jasmin-dlrlookupd.service" ]; then
+	systemctl enable jasmin-dlrlookupd
+	systemctl start jasmin-dlrlookupd || exit $?
 fi
 
 exit 0
