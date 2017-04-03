@@ -93,9 +93,9 @@ cd ../falcon-1.1.0
 %{__python} setup.py build
 cd ../vine-1.1.3
 %{__python} setup.py build
-cd ../kombu-4.0.2.tar.gz
+cd ../kombu-4.0.2
 %{__python} setup.py build
-cd ../billiard-3.5.0.2.tar.gz
+cd ../billiard-3.5.0.2
 %{__python} setup.py build
 
 %install
@@ -141,9 +141,9 @@ cd ../falcon-1.1.0
 %{__python} setup.py install --skip-build --optimize=2 --root=%{buildroot}
 cd ../vine-1.1.3
 %{__python} setup.py install --skip-build --optimize=2 --root=%{buildroot}
-cd ../kombu-4.0.2.tar.gz
+cd ../kombu-4.0.2
 %{__python} setup.py install --skip-build --optimize=2 --root=%{buildroot}
-cd ../billiard-3.5.0.2.tar.gz
+cd ../billiard-3.5.0.2
 %{__python} setup.py install --skip-build --optimize=2 --root=%{buildroot}
 
 %clean
