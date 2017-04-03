@@ -186,6 +186,7 @@ rm -rf %{buildroot}
 %{python_sitelib}/redis
 %{python_sitelib}/vine
 %{python_sitelib}/kombu
+%{python_sitelib}/amqp
 /usr/bin/pyhtmlizer
 /usr/bin/tap2deb
 /usr/bin/ckeygen
