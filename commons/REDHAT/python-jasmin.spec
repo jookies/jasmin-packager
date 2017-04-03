@@ -15,6 +15,8 @@ Source5:              https://pypi.python.org/packages/b2/b7/888565f3e955473247a
 Source6:              https://pypi.python.org/packages/68/44/5efe9e98ad83ef5b742ce62a15bea609ed5a0d1caf35b79257ddb324031a/redis-2.10.5.tar.gz
 Source7:              https://pypi.python.org/packages/91/1a/363c71aba58e94d73aa363de2c80dd5b81e938db8b3120fd8a40a6783152/falcon-1.1.0.tar.gz
 Source8:              https://pypi.python.org/packages/35/21/308904b027636f13c3970ed7caf2c53fca77fa160122ae3ac392d9eb6307/vine-1.1.3.tar.gz
+Source9:              https://pypi.python.org/packages/c7/76/58c655a80bf08b703478ce673ed4e3029297105951863b73030d45b06b42/kombu-4.0.2.tar.gz
+Source10:             https://pypi.python.org/packages/e6/b8/6e6750f21309c21ea267834d5e76b89ce64a9ddf38fa4161fd6fb32ffc3b/billiard-3.5.0.2.tar.gz
 BuildArch:            x86_64
 BuildRoot:            %(mktemp -ud %{_tmppath}/%{name}-%{version}-%{release}-XXXXXX)
 
@@ -69,6 +71,8 @@ in-memory execution.
 %setup -T -D -c -a 6
 %setup -T -D -c -a 7
 %setup -T -D -c -a 8
+%setup -T -D -c -a 9
+%setup -T -D -c -a 10
 
 %build
 cd jasmin-%pypiversion%
@@ -88,6 +92,10 @@ cd ../redis-2.10.5
 cd ../falcon-1.1.0
 %{__python} setup.py build
 cd ../vine-1.1.3
+%{__python} setup.py build
+cd ../kombu-4.0.2.tar.gz
+%{__python} setup.py build
+cd ../billiard-3.5.0.2.tar.gz
 %{__python} setup.py build
 
 %install
@@ -132,6 +140,10 @@ cd ../redis-2.10.5
 cd ../falcon-1.1.0
 %{__python} setup.py install --skip-build --optimize=2 --root=%{buildroot}
 cd ../vine-1.1.3
+%{__python} setup.py install --skip-build --optimize=2 --root=%{buildroot}
+cd ../kombu-4.0.2.tar.gz
+%{__python} setup.py install --skip-build --optimize=2 --root=%{buildroot}
+cd ../billiard-3.5.0.2.tar.gz
 %{__python} setup.py install --skip-build --optimize=2 --root=%{buildroot}
 
 %clean
