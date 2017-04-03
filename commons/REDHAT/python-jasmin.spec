@@ -178,6 +178,7 @@ rm -rf %{buildroot}
 %{python_sitelib}/vine
 %{python_sitelib}/kombu
 %{python_sitelib}/billiard
+%{python_sitelib}/_billiard.so
 /usr/bin/pyhtmlizer
 /usr/bin/tap2deb
 /usr/bin/ckeygen
