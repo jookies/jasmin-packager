@@ -24,7 +24,6 @@ ZOPE_IFACE_URL="https://pypi.python.org/packages/source/z/zope.interface/zope.in
 PYPI_CELERY_URL="https://pypi.python.org/packages/b2/b7/888565f3e955473247aef86174db5121d16de6661b69bd8f3d10aff574f6/celery-4.0.2.tar.gz"
 PYPI_REDIS_URL="https://pypi.python.org/packages/68/44/5efe9e98ad83ef5b742ce62a15bea609ed5a0d1caf35b79257ddb324031a/redis-2.10.5.tar.gz"
 PYPI_FALCON_URL="https://pypi.python.org/packages/91/1a/363c71aba58e94d73aa363de2c80dd5b81e938db8b3120fd8a40a6783152/falcon-1.1.0.tar.gz"
-PYPI_GUNICORN_URL="https://pypi.python.org/packages/30/3a/10bb213cede0cc4d13ac2263316c872a64bf4c819000c8ccd801f1d5f822/gunicorn-19.7.1.tar.gz"
 
 [ -d $COMMONS_DIR ] || exit 10
 
@@ -54,7 +53,6 @@ echo "RUN curl '$ZOPE_IFACE_URL' -o ~/rpmbuild/SOURCES/zope.interface-4.1.3.tar.
 echo "RUN curl '$PYPI_CELERY_URL' -o ~/rpmbuild/SOURCES/celery-4.0.2.tar.gz" >> $DOCKER_FILE
 echo "RUN curl '$PYPI_REDIS_URL' -o ~/rpmbuild/SOURCES/redis-2.10.5.tar.gz" >> $DOCKER_FILE
 echo "RUN curl '$PYPI_FALCON_URL' -o ~/rpmbuild/SOURCES/falcon-1.1.0.tar.gz" >> $DOCKER_FILE
-echo "RUN curl '$PYPI_GUNICORN_URL' -o ~/rpmbuild/SOURCES/gunicorn-19.7.1.tar.gz" >> $DOCKER_FILE
 echo "RUN rpmbuild -ba ~/rpmbuild/SPECS/python-jasmin.spec" >> $DOCKER_FILE
 
 # Create rpm inside a centos 7 container

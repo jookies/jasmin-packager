@@ -14,7 +14,6 @@ Source4:              https://pypi.python.org/packages/source/z/zope.interface/z
 Source5:              https://pypi.python.org/packages/b2/b7/888565f3e955473247aef86174db5121d16de6661b69bd8f3d10aff574f6/celery-4.0.2.tar.gz
 Source6:              https://pypi.python.org/packages/68/44/5efe9e98ad83ef5b742ce62a15bea609ed5a0d1caf35b79257ddb324031a/redis-2.10.5.tar.gz
 Source7:              https://pypi.python.org/packages/91/1a/363c71aba58e94d73aa363de2c80dd5b81e938db8b3120fd8a40a6783152/falcon-1.1.0.tar.gz
-Source8:              https://pypi.python.org/packages/30/3a/10bb213cede0cc4d13ac2263316c872a64bf4c819000c8ccd801f1d5f822/gunicorn-19.7.1.tar.gz
 BuildArch:            x86_64
 BuildRoot:            %(mktemp -ud %{_tmppath}/%{name}-%{version}-%{release}-XXXXXX)
 
@@ -67,7 +66,6 @@ in-memory execution.
 %setup -T -D -c -a 5
 %setup -T -D -c -a 6
 %setup -T -D -c -a 7
-%setup -T -D -c -a 8
 
 %build
 cd jasmin-%pypiversion%
@@ -85,8 +83,6 @@ cd ../celery-4.0.2
 cd ../redis-2.10.5
 %{__python} setup.py build
 cd ../falcon-1.1.0
-%{__python} setup.py build
-cd ../gunicorn-19.7.1
 %{__python} setup.py build
 
 %install
@@ -129,8 +125,6 @@ cd ../celery-4.0.2
 cd ../redis-2.10.5
 %{__python} setup.py install --skip-build --optimize=2 --root=%{buildroot}
 cd ../falcon-1.1.0
-%{__python} setup.py install --skip-build --optimize=2 --root=%{buildroot}
-cd ../gunicorn-19.7.1
 %{__python} setup.py install --skip-build --optimize=2 --root=%{buildroot}
 
 %clean
