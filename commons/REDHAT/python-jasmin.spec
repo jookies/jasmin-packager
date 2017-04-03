@@ -137,6 +137,8 @@ rm -rf %{buildroot}
 /usr/bin/interceptord.py
 /usr/bin/dlrd.py
 /usr/bin/dlrlookupd.py
+/usr/bin/celery
+/usr/bin/falcon-*
 %{_unitdir}/jasmind.service
 %{_unitdir}/jasmin-interceptord.service
 %{_unitdir}/jasmin-dlrd.service
@@ -151,6 +153,9 @@ rm -rf %{buildroot}
 %{python_sitearch}/zope.*
 %{python_sitearch}/twisted
 %{python_sitearch}/Twisted-*
+%{python_sitelib}/celery
+%{python_sitelib}/falcon
+%{python_sitelib}/redis
 /usr/bin/pyhtmlizer
 /usr/bin/tap2deb
 /usr/bin/ckeygen
