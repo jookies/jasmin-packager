@@ -28,7 +28,7 @@ Requires(preun):      systemd
 Requires(postun):     systemd
 Requires:             python >= 2.7.0, python-dateutil, python-lockfile, pyOpenSSL
 Requires:             rabbitmq-server, redis
-Requires:             python-mimeparse, pytz
+Requires:             python-mimeparse, pytz, python-amqp
 Requires(pre):        /usr/sbin/useradd, /usr/sbin/groupadd, /usr/bin/getent
 
 %description
@@ -172,13 +172,14 @@ rm -rf %{buildroot}
 %{python_sitearch}/zope.*
 %{python_sitearch}/twisted
 %{python_sitearch}/Twisted-*
+%{python_sitearch}/billiard
+%{python_sitearch}/billiard-*
+%{python_sitearch}/_billiard.so
 %{python_sitelib}/celery
 %{python_sitelib}/falcon
 %{python_sitelib}/redis
 %{python_sitelib}/vine
 %{python_sitelib}/kombu
-%{python_sitelib}/billiard
-%{python_sitelib}/_billiard.so
 /usr/bin/pyhtmlizer
 /usr/bin/tap2deb
 /usr/bin/ckeygen
