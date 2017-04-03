@@ -25,6 +25,7 @@ Requires(preun):      systemd
 Requires(postun):     systemd
 Requires:             python >= 2.7.0, python-dateutil, python-lockfile, pyOpenSSL
 Requires:             rabbitmq-server, redis
+Requires:             python-mimeparse, pytz, python-kombu, python-billiard
 Requires(pre):        /usr/sbin/useradd, /usr/sbin/groupadd, /usr/bin/getent
 
 %description
@@ -176,24 +177,24 @@ chown jasmin:jasmin /var/log/jasmin
 %systemd_post jasmin-interceptord.service
 %systemd_post jasmin-dlrd.service
 %systemd_post jasmin-dlrlookupd.service
-%systemd_post jasmin-restapi.service
 %systemd_post jasmin-celery.service
+%systemd_post jasmin-restapi.service
 
 %preun
 %systemd_preun jasmind.service
 %systemd_preun jasmin-interceptord.service
 %systemd_preun jasmin-dlrd.service
 %systemd_preun jasmin-dlrlookupd.service
-%systemd_preun jasmin-restapi.service
 %systemd_preun jasmin-celery.service
+%systemd_preun jasmin-restapi.service
 
 %postun
 %systemd_postun_with_restart jasmind.service
 %systemd_postun_with_restart jasmin-interceptord.service
 %systemd_postun_with_restart jasmin-dlrd.service
 %systemd_postun_with_restart jasmin-dlrlookupd.service
-%systemd_postun_with_restart jasmin-restapi.service
 %systemd_postun_with_restart jasmin-celery.service
+%systemd_postun_with_restart jasmin-restapi.service
 
 %changelog
 * Sat Oct 31 2015 Jookies LTD <jasmin@jookies.net> - %rhversion%
