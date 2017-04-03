@@ -27,6 +27,7 @@ PYPI_FALCON_URL="https://pypi.python.org/packages/91/1a/363c71aba58e94d73aa363de
 PYPI_VINE_URL="https://pypi.python.org/packages/35/21/308904b027636f13c3970ed7caf2c53fca77fa160122ae3ac392d9eb6307/vine-1.1.3.tar.gz"
 PYPI_KOMBU_URL="https://pypi.python.org/packages/c7/76/58c655a80bf08b703478ce673ed4e3029297105951863b73030d45b06b42/kombu-4.0.2.tar.gz"
 PYPI_BILLIARD_URL="https://pypi.python.org/packages/e6/b8/6e6750f21309c21ea267834d5e76b89ce64a9ddf38fa4161fd6fb32ffc3b/billiard-3.5.0.2.tar.gz"
+PYPI_AMQP_URL="https://pypi.python.org/packages/23/39/06bb8bd31e78962675f696498f7821f5dbd11aa0919c5a811d83a0e02609/amqp-2.1.4.tar.gz"
 
 [ -d $COMMONS_DIR ] || exit 10
 
@@ -59,6 +60,7 @@ echo "RUN curl '$PYPI_FALCON_URL' -o ~/rpmbuild/SOURCES/falcon-1.1.0.tar.gz" >> 
 echo "RUN curl '$PYPI_VINE_URL' -o ~/rpmbuild/SOURCES/vine-1.1.3.tar.gz" >> $DOCKER_FILE
 echo "RUN curl '$PYPI_KOMBU_URL' -o ~/rpmbuild/SOURCES/kombu-4.0.2.tar.gz" >> $DOCKER_FILE
 echo "RUN curl '$PYPI_BILLIARD_URL' -o ~/rpmbuild/SOURCES/billiard-3.5.0.2.tar.gz" >> $DOCKER_FILE
+echo "RUN curl '$PYPI_AMQP_URL' -o ~/rpmbuild/SOURCES/amqp-2.1.4.tar.gz" >> $DOCKER_FILE
 echo "RUN rpmbuild -ba ~/rpmbuild/SPECS/python-jasmin.spec" >> $DOCKER_FILE
 
 # Create rpm inside a centos 7 container

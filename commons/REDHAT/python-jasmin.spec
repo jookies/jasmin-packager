@@ -17,6 +17,7 @@ Source7:              https://pypi.python.org/packages/91/1a/363c71aba58e94d73aa
 Source8:              https://pypi.python.org/packages/35/21/308904b027636f13c3970ed7caf2c53fca77fa160122ae3ac392d9eb6307/vine-1.1.3.tar.gz
 Source9:              https://pypi.python.org/packages/c7/76/58c655a80bf08b703478ce673ed4e3029297105951863b73030d45b06b42/kombu-4.0.2.tar.gz
 Source10:             https://pypi.python.org/packages/e6/b8/6e6750f21309c21ea267834d5e76b89ce64a9ddf38fa4161fd6fb32ffc3b/billiard-3.5.0.2.tar.gz
+Source11:             https://pypi.python.org/packages/23/39/06bb8bd31e78962675f696498f7821f5dbd11aa0919c5a811d83a0e02609/amqp-2.1.4.tar.gz
 BuildArch:            x86_64
 BuildRoot:            %(mktemp -ud %{_tmppath}/%{name}-%{version}-%{release}-XXXXXX)
 
@@ -28,7 +29,7 @@ Requires(preun):      systemd
 Requires(postun):     systemd
 Requires:             python >= 2.7.0, python-dateutil, python-lockfile, pyOpenSSL
 Requires:             rabbitmq-server, redis
-Requires:             python-mimeparse, pytz, python-amqp
+Requires:             python-mimeparse, pytz, python-setuptools
 Requires(pre):        /usr/sbin/useradd, /usr/sbin/groupadd, /usr/bin/getent
 
 %description
@@ -73,6 +74,7 @@ in-memory execution.
 %setup -T -D -c -a 8
 %setup -T -D -c -a 9
 %setup -T -D -c -a 10
+%setup -T -D -c -a 11
 
 %build
 cd jasmin-%pypiversion%
@@ -96,6 +98,8 @@ cd ../vine-1.1.3
 cd ../kombu-4.0.2
 %{__python} setup.py build
 cd ../billiard-3.5.0.2
+%{__python} setup.py build
+cd ../amqp-2.1.4
 %{__python} setup.py build
 
 %install
@@ -144,6 +148,8 @@ cd ../vine-1.1.3
 cd ../kombu-4.0.2
 %{__python} setup.py install --skip-build --optimize=2 --root=%{buildroot}
 cd ../billiard-3.5.0.2
+%{__python} setup.py install --skip-build --optimize=2 --root=%{buildroot}
+cd ../amqp-2.1.4
 %{__python} setup.py install --skip-build --optimize=2 --root=%{buildroot}
 
 %clean
