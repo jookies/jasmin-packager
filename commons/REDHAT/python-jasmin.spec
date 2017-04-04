@@ -29,7 +29,7 @@ Requires(preun):      systemd
 Requires(postun):     systemd
 Requires:             python >= 2.7.0, python-dateutil, python-lockfile, pyOpenSSL
 Requires:             rabbitmq-server, redis
-Requires:             python-mimeparse, pytz, python-setuptools
+Requires:             python-mimeparse, pytz, python-setuptools, python-requests
 Requires(pre):        /usr/sbin/useradd, /usr/sbin/groupadd, /usr/bin/getent
 
 %description

@@ -16,7 +16,7 @@ if [ $# -ne 2 ]; then
     exit 1
 fi
 
-PYPI_JASMIN_URL="http://jookies.net/jasmin-packaging/jasmin-0.9rc16.tar.gz"
+PYPI_JASMIN_URL="http://jookies.net/jasmin-packaging/jasmin-$1.tar.gz"
 PYPI_TXAMQP_URL="https://pypi.python.org/packages/source/t/txAMQP/txAMQP-0.6.2.tar.gz"
 PYPI_PYPARS_URL="https://pypi.python.org/packages/source/p/pyparsing/pyparsing-2.0.3.tar.gz"
 TWISTED_URL="https://pypi.python.org/packages/source/T/Twisted/Twisted-15.4.0.tar.bz2"

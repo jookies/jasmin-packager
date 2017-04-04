@@ -20,3 +20,13 @@ fi
 if [ -f /lib/systemd/system/jasmin-dlrlookupd.service ]; then
   systemctl stop jasmin-dlrlookupd
 fi
+
+# stop restapi server
+if [ -f /lib/systemd/system/jasmin-restapi.service ]; then
+  systemctl stop jasmin-restapi
+fi
+
+# stop celery server
+if [ -f /lib/systemd/system/jasmin-celery.service ]; then
+  systemctl stop jasmin-celery
+fi

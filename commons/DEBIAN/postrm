@@ -24,6 +24,12 @@ if [ "$1" = "remove" ]; then
     # remove dlrlookupd start script
     systemctl stop jasmin-dlrlookupd
     systemctl disable jasmin-dlrlookupd
+    # remove restapi start script
+    systemctl stop jasmin-restapi
+    systemctl disable jasmin-restapi
+    # remove celery start script
+    systemctl stop jasmin-celery
+    systemctl disable jasmin-celery
 fi
 
 exit 0
