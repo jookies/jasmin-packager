@@ -209,6 +209,8 @@ chown jasmin:jasmin /var/log/jasmin
 %systemd_post jasmin-dlrlookupd.service
 %systemd_post jasmin-celery.service
 %systemd_post jasmin-restapi.service
+# Link to restapi and jasmin-celery configurations
+ln -sf %{python_sitelib}/jasmin/protocols/rest/config.py
 
 %preun
 %systemd_preun jasmind.service
