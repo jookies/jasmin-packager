@@ -11,6 +11,13 @@ Source1:              https://pypi.python.org/packages/source/t/txAMQP/txAMQP-0.
 Source2:              https://pypi.python.org/packages/source/p/pyparsing/pyparsing-2.0.3.tar.gz
 Source3:              https://pypi.python.org/packages/source/T/Twisted/Twisted-15.4.0.tar.bz2
 Source4:              https://pypi.python.org/packages/source/z/zope.interface/zope.interface-4.1.3.tar.gz
+Source5:              https://pypi.python.org/packages/b2/b7/888565f3e955473247aef86174db5121d16de6661b69bd8f3d10aff574f6/celery-4.0.2.tar.gz
+Source6:              https://pypi.python.org/packages/68/44/5efe9e98ad83ef5b742ce62a15bea609ed5a0d1caf35b79257ddb324031a/redis-2.10.5.tar.gz
+Source7:              https://pypi.python.org/packages/91/1a/363c71aba58e94d73aa363de2c80dd5b81e938db8b3120fd8a40a6783152/falcon-1.1.0.tar.gz
+Source8:              https://pypi.python.org/packages/35/21/308904b027636f13c3970ed7caf2c53fca77fa160122ae3ac392d9eb6307/vine-1.1.3.tar.gz
+Source9:              https://pypi.python.org/packages/c7/76/58c655a80bf08b703478ce673ed4e3029297105951863b73030d45b06b42/kombu-4.0.2.tar.gz
+Source10:             https://pypi.python.org/packages/e6/b8/6e6750f21309c21ea267834d5e76b89ce64a9ddf38fa4161fd6fb32ffc3b/billiard-3.5.0.2.tar.gz
+Source11:             https://pypi.python.org/packages/23/39/06bb8bd31e78962675f696498f7821f5dbd11aa0919c5a811d83a0e02609/amqp-2.1.4.tar.gz
 BuildArch:            x86_64
 BuildRoot:            %(mktemp -ud %{_tmppath}/%{name}-%{version}-%{release}-XXXXXX)
 
@@ -22,6 +29,7 @@ Requires(preun):      systemd
 Requires(postun):     systemd
 Requires:             python >= 2.7.0, python-dateutil, python-lockfile, pyOpenSSL
 Requires:             rabbitmq-server, redis
+Requires:             python-mimeparse, pytz, python-setuptools, python-requests
 Requires(pre):        /usr/sbin/useradd, /usr/sbin/groupadd, /usr/bin/getent
 
 %description
@@ -60,6 +68,13 @@ in-memory execution.
 %setup -T -D -c -a 2
 %setup -T -D -c -a 3
 %setup -T -D -c -a 4
+%setup -T -D -c -a 5
+%setup -T -D -c -a 6
+%setup -T -D -c -a 7
+%setup -T -D -c -a 8
+%setup -T -D -c -a 9
+%setup -T -D -c -a 10
+%setup -T -D -c -a 11
 
 %build
 cd jasmin-%pypiversion%
@@ -71,6 +86,20 @@ cd ../txAMQP-0.6.2
 cd ../Twisted-15.4.0
 %{__python} setup.py build
 cd ../zope.interface-4.1.3
+%{__python} setup.py build
+cd ../celery-4.0.2
+%{__python} setup.py build
+cd ../redis-2.10.5
+%{__python} setup.py build
+cd ../falcon-1.1.0
+%{__python} setup.py build
+cd ../vine-1.1.3
+%{__python} setup.py build
+cd ../kombu-4.0.2
+%{__python} setup.py build
+cd ../billiard-3.5.0.2
+%{__python} setup.py build
+cd ../amqp-2.1.4
 %{__python} setup.py build
 
 %install
@@ -96,6 +125,8 @@ install -m0644 misc/config/systemd/jasmind.service %{buildroot}/%{_unitdir}/jasm
 install -m0644 misc/config/systemd/jasmin-interceptord.service %{buildroot}/%{_unitdir}/jasmin-interceptord.service
 install -m0644 misc/config/systemd/jasmin-dlrd.service %{buildroot}/%{_unitdir}/jasmin-dlrd.service
 install -m0644 misc/config/systemd/jasmin-dlrlookupd.service %{buildroot}/%{_unitdir}/jasmin-dlrlookupd.service
+install -m0644 misc/config/systemd/jasmin-restapi.service %{buildroot}/%{_unitdir}/jasmin-restapi.service
+install -m0644 misc/config/systemd/jasmin-celery.service %{buildroot}/%{_unitdir}/jasmin-celery.service
 
 # Install other requirements
 cd ../pyparsing-2.0.3
@@ -105,6 +136,20 @@ cd ../txAMQP-0.6.2
 cd ../Twisted-15.4.0
 %{__python} setup.py install --skip-build --optimize=2 --root=%{buildroot}
 cd ../zope.interface-4.1.3
+%{__python} setup.py install --skip-build --optimize=2 --root=%{buildroot}
+cd ../celery-4.0.2
+%{__python} setup.py install --skip-build --optimize=2 --root=%{buildroot}
+cd ../redis-2.10.5
+%{__python} setup.py install --skip-build --optimize=2 --root=%{buildroot}
+cd ../falcon-1.1.0
+%{__python} setup.py install --skip-build --optimize=2 --root=%{buildroot}
+cd ../vine-1.1.3
+%{__python} setup.py install --skip-build --optimize=2 --root=%{buildroot}
+cd ../kombu-4.0.2
+%{__python} setup.py install --skip-build --optimize=2 --root=%{buildroot}
+cd ../billiard-3.5.0.2
+%{__python} setup.py install --skip-build --optimize=2 --root=%{buildroot}
+cd ../amqp-2.1.4
 %{__python} setup.py install --skip-build --optimize=2 --root=%{buildroot}
 
 %clean
@@ -117,10 +162,14 @@ rm -rf %{buildroot}
 /usr/bin/interceptord.py
 /usr/bin/dlrd.py
 /usr/bin/dlrlookupd.py
+/usr/bin/celery
+/usr/bin/falcon-*
 %{_unitdir}/jasmind.service
 %{_unitdir}/jasmin-interceptord.service
 %{_unitdir}/jasmin-dlrd.service
 %{_unitdir}/jasmin-dlrlookupd.service
+%{_unitdir}/jasmin-restapi.service
+%{_unitdir}/jasmin-celery.service
 %{python_sitelib}/jasmin
 %{python_sitelib}/txamqp
 %{python_sitelib}/pyparsing.*
@@ -129,6 +178,15 @@ rm -rf %{buildroot}
 %{python_sitearch}/zope.*
 %{python_sitearch}/twisted
 %{python_sitearch}/Twisted-*
+%{python_sitearch}/billiard
+%{python_sitearch}/billiard-*
+%{python_sitearch}/_billiard.so
+%{python_sitelib}/celery
+%{python_sitelib}/falcon
+%{python_sitelib}/redis
+%{python_sitelib}/vine
+%{python_sitelib}/kombu
+%{python_sitelib}/amqp
 /usr/bin/pyhtmlizer
 /usr/bin/tap2deb
 /usr/bin/ckeygen
@@ -149,18 +207,26 @@ chown jasmin:jasmin /var/log/jasmin
 %systemd_post jasmin-interceptord.service
 %systemd_post jasmin-dlrd.service
 %systemd_post jasmin-dlrlookupd.service
+%systemd_post jasmin-celery.service
+%systemd_post jasmin-restapi.service
+# Link to restapi and jasmin-celery configurations
+ln -sf %{python_sitelib}/jasmin/protocols/rest/config.py /etc/jasmin/rest-api.py.conf
 
 %preun
 %systemd_preun jasmind.service
 %systemd_preun jasmin-interceptord.service
 %systemd_preun jasmin-dlrd.service
 %systemd_preun jasmin-dlrlookupd.service
+%systemd_preun jasmin-celery.service
+%systemd_preun jasmin-restapi.service
 
 %postun
 %systemd_postun_with_restart jasmind.service
 %systemd_postun_with_restart jasmin-interceptord.service
 %systemd_postun_with_restart jasmin-dlrd.service
 %systemd_postun_with_restart jasmin-dlrlookupd.service
+%systemd_postun_with_restart jasmin-celery.service
+%systemd_postun_with_restart jasmin-restapi.service
 
 %changelog
 * Sat Oct 31 2015 Jookies LTD <jasmin@jookies.net> - %rhversion%

@@ -19,6 +19,9 @@ adduser --disabled-login \
 chown jasmin. /etc/jasmin/store/
 chown jasmin. /var/log/jasmin
 
+# Link the rest api config file to /etc/jasmin
+find /usr -type f -wholename "*jasmin/protocols/rest/config.py" -exec ln -sf '{}' /etc/jasmin/rest-api.py.conf \;
+
 # Install init script
 if [ -x "/lib/systemd/system/jasmind.service" ]; then
 	systemctl enable jasmind
@@ -41,6 +44,18 @@ fi
 if [ -x "/lib/systemd/system/jasmin-dlrlookupd.service" ]; then
 	systemctl enable jasmin-dlrlookupd
 	systemctl start jasmin-dlrlookupd || exit $?
+fi
+
+# Install init script
+if [ -x "/lib/systemd/system/jasmin-celery.service" ]; then
+	systemctl enable jasmin-celery
+	systemctl start jasmin-celery || exit $?
+fi
+
+# Install init script
+if [ -x "/lib/systemd/system/jasmin-restapi.service" ]; then
+	systemctl enable jasmin-restapi
+	systemctl start jasmin-restapi || exit $?
 fi
 
 exit 0
