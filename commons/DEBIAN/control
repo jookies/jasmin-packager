@@ -3,7 +3,7 @@ Version: %debversion%
 Section: python
 Priority: optional
 Architecture: all
-Depends: python2.7, python (>= 2.7.0), python (<< 2.8), rabbitmq-server, redis-server, adduser, python-twisted-core, python-twisted-web, python-twisted-conch, python-dateutil, python-txamqp, python-pyparsing, python-lockfile, python-requests, python-setuptools, python-tz, python-mimeparse, python-celery, python-celery-common, python-redis, python-amqp, python-falcon
+Depends: python2.7, python (>= 2.7.0), python (<< 2.8), rabbitmq-server, redis-server, adduser, python-twisted-core, python-twisted-web, python-twisted-conch, python-dateutil, python-txamqp, python-pyparsing, python-lockfile, python-requests, python-setuptools, python-tz, python-mimeparse, python-celery, python-celery-common, python-redis, python-amqp
 Maintainer: Jookies LTD <jasmin@jookies.net>
 Homepage: http://www.jasminsms.com
 Bugs: https://github.com/jookies/jasmin/issues

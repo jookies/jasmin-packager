@@ -13,11 +13,10 @@ Source3:              https://pypi.python.org/packages/source/T/Twisted/Twisted-
 Source4:              https://pypi.python.org/packages/source/z/zope.interface/zope.interface-4.1.3.tar.gz
 Source5:              https://pypi.python.org/packages/b2/b7/888565f3e955473247aef86174db5121d16de6661b69bd8f3d10aff574f6/celery-4.0.2.tar.gz
 Source6:              https://pypi.python.org/packages/68/44/5efe9e98ad83ef5b742ce62a15bea609ed5a0d1caf35b79257ddb324031a/redis-2.10.5.tar.gz
-Source7:              https://pypi.python.org/packages/91/1a/363c71aba58e94d73aa363de2c80dd5b81e938db8b3120fd8a40a6783152/falcon-1.1.0.tar.gz
-Source8:              https://pypi.python.org/packages/35/21/308904b027636f13c3970ed7caf2c53fca77fa160122ae3ac392d9eb6307/vine-1.1.3.tar.gz
-Source9:              https://pypi.python.org/packages/c7/76/58c655a80bf08b703478ce673ed4e3029297105951863b73030d45b06b42/kombu-4.0.2.tar.gz
-Source10:             https://pypi.python.org/packages/e6/b8/6e6750f21309c21ea267834d5e76b89ce64a9ddf38fa4161fd6fb32ffc3b/billiard-3.5.0.2.tar.gz
-Source11:             https://pypi.python.org/packages/23/39/06bb8bd31e78962675f696498f7821f5dbd11aa0919c5a811d83a0e02609/amqp-2.1.4.tar.gz
+Source7:              https://pypi.python.org/packages/35/21/308904b027636f13c3970ed7caf2c53fca77fa160122ae3ac392d9eb6307/vine-1.1.3.tar.gz
+Source8:              https://pypi.python.org/packages/c7/76/58c655a80bf08b703478ce673ed4e3029297105951863b73030d45b06b42/kombu-4.0.2.tar.gz
+Source9:              https://pypi.python.org/packages/e6/b8/6e6750f21309c21ea267834d5e76b89ce64a9ddf38fa4161fd6fb32ffc3b/billiard-3.5.0.2.tar.gz
+Source10:             https://pypi.python.org/packages/23/39/06bb8bd31e78962675f696498f7821f5dbd11aa0919c5a811d83a0e02609/amqp-2.1.4.tar.gz
 BuildArch:            x86_64
 BuildRoot:            %(mktemp -ud %{_tmppath}/%{name}-%{version}-%{release}-XXXXXX)
 
@@ -74,7 +73,6 @@ in-memory execution.
 %setup -T -D -c -a 8
 %setup -T -D -c -a 9
 %setup -T -D -c -a 10
-%setup -T -D -c -a 11
 
 %build
 cd jasmin-%pypiversion%
@@ -90,8 +88,6 @@ cd ../zope.interface-4.1.3
 cd ../celery-4.0.2
 %{__python} setup.py build
 cd ../redis-2.10.5
-%{__python} setup.py build
-cd ../falcon-1.1.0
 %{__python} setup.py build
 cd ../vine-1.1.3
 %{__python} setup.py build
@@ -141,8 +137,6 @@ cd ../celery-4.0.2
 %{__python} setup.py install --skip-build --optimize=2 --root=%{buildroot}
 cd ../redis-2.10.5
 %{__python} setup.py install --skip-build --optimize=2 --root=%{buildroot}
-cd ../falcon-1.1.0
-%{__python} setup.py install --skip-build --optimize=2 --root=%{buildroot}
 cd ../vine-1.1.3
 %{__python} setup.py install --skip-build --optimize=2 --root=%{buildroot}
 cd ../kombu-4.0.2
@@ -163,7 +157,6 @@ rm -rf %{buildroot}
 /usr/bin/dlrd.py
 /usr/bin/dlrlookupd.py
 /usr/bin/celery
-/usr/bin/falcon-*
 %{_unitdir}/jasmind.service
 %{_unitdir}/jasmin-interceptord.service
 %{_unitdir}/jasmin-dlrd.service
@@ -182,7 +175,6 @@ rm -rf %{buildroot}
 %{python_sitearch}/billiard-*
 %{python_sitearch}/_billiard.so
 %{python_sitelib}/celery
-%{python_sitelib}/falcon
 %{python_sitelib}/redis
 %{python_sitelib}/vine
 %{python_sitelib}/kombu
